@@ -1,4 +1,4 @@
-name: Python CI Pipeline
+name: Python CI + Docker Pipeline
 
 on: push
 
@@ -10,10 +10,8 @@ jobs:
       - name: Get Code
         uses: actions/checkout@v3
 
-      - name: Install Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.10"
+      - name: Build Docker Image
+        run: docker build -t my-python-app .
 
-      - name: Run Python App
-        run: python ci-cd.py
+      - name: Run Docker Container
+        run: docker run my-python-app
